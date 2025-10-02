@@ -14,14 +14,14 @@ export default function Home() {
 
       {/* About Section */}
       <section className="max-w-4xl w-full px-6 py-16 flex flex-col md:flex-row items-center md:items-start md:gap-12">
-        {/* Image */}
-        <div className="w-48 h-48 md:w-64 md:h-64 mb-8 md:mb-0 rounded-full overflow-hidden shadow-lg">
-          <img
-            src="/assets/corey.jpg" // replace with your photo
-            alt="Corey Beaver"
-            className="w-full h-full object-cover"
-          />
-        </div>
+     {/* Image */}
+<div className="w-48 h-48 md:w-64 md:h-64 mb-8 md:mb-0 rounded-full overflow-hidden shadow-lg">
+  <img
+    src={`${import.meta.env.BASE_URL}assets/corey.jpg`} // works locally and on GitHub Pages
+    alt="Corey Beaver"
+    className="w-full h-full object-cover"
+  />
+</div>
 
         {/* Text */}
         <div className="flex-1">
