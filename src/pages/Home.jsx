@@ -27,8 +27,8 @@ export default function Home() {
         <div className="flex-1">
           <h2 className="text-3xl font-semibold mb-4">About Me</h2>
           <p className="mb-4">
-            Hi, I’m <strong>Corey Beaver</strong>, an Apostolic Pentecostal producer based in Troy, MI.  
-            I mainly play keys—including piano, organ, and auxiliary instruments—but I also play guitar and bass.
+            Hi, I’m <strong>Corey Beaver</strong>, an Apostolic Pentecostal producer based in Detroit, MI.  
+            I mainly play keys, including piano, organ, and auxiliary instruments, but I also play guitar and bass.
           </p>
           <p className="mb-4">
             I am the main keys player for <strong>Ascend Church</strong> in Troy, MI, and I’ve studied music for over 8 years.  

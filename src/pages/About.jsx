@@ -28,7 +28,7 @@ export default function About() {
           <h2 className="text-3xl font-semibold mb-4">About Me</h2>
 
           <p className="mb-4">
-            Hi, I’m <strong>Corey Beaver</strong>, an Apostolic Pentecostal producer and worship musician based in Troy, MI. I mainly play keys, including piano, organ, and auxiliary instruments, but I also play guitar and bass. My musical journey began as a classically trained trumpet player, performing in marching bands, symphonic bands, and jazz ensembles, which gave me a strong foundation in music theory and performance.
+            Hi, I’m <strong>Corey Beaver</strong>, an Apostolic Pentecostal producer and worship musician based in Detroit, MI. I mainly play keys, including piano, organ, and auxiliary instruments, but I also play guitar and bass. My musical journey began as a classically trained trumpet player, performing in marching bands, symphonic bands, and jazz ensembles, which gave me a strong foundation in music theory and performance.
           </p>
 
           <p className="mb-4">
@@ -36,7 +36,7 @@ export default function About() {
           </p>
 
           <p className="mb-4">
-            My musical path was shaped by influential mentors, including <strong>Josh Kiser</strong>, who invited me to join the worship team at Ascend Church, and my pastor <strong>Joumeel Mclarine</strong>. My theological studies were inspired by <strong>Rev. Bobby Killmon</strong>, my Biblical Studies Dean at Indiana Bible College,  <strong>TJ Elkins</strong>, a minister at Ascend Church, and of course, my pastor. My parents,  <strong>John Beaver</strong> and  <strong>Crystal Beaver</strong> are the most important roles in my journey, having raised me in Apostolic Faith my entire life.
+            My musical path was shaped by influential mentors, including <strong>Josh Kiser</strong>, who invited me to join the worship team at Ascend Church, <strong>Payton West</strong>, who gave me my first piano lesson, <strong>Dr Lindel Anderson</strong>, the former dean of Worship Studies at Indiana Bible College, and my pastor <strong>Joumeel Mclarine</strong>. My theological studies were inspired by <strong>Bobby Killmon</strong>, my Biblical Studies Dean at Indiana Bible College,  <strong>TJ Elkins</strong>, a minister at Ascend Church, and of course, my pastor. My parents,  <strong>John Beaver</strong> and  <strong>Crystal Beaver</strong> are the most important roles in my journey, having raised me in Apostolic Faith my entire life.
           </p>
 
           <p className="mb-4">

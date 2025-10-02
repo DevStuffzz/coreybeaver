@@ -11,6 +11,8 @@ import Purchase from "./pages/Purchase"
 import About from './pages/about';
 import Contact from './pages/contact';
 import Footer from './components/Footer';
+import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
 
 const App = () => {
   return (
@@ -23,6 +25,8 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/products/:slug" element={<ProductDetail />} />
         <Route path="/purchase/:slug" element={<Purchase />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
       </Routes>
       <Footer/>
     </>

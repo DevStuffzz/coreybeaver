@@ -9,10 +9,11 @@ const Navbar = () => {
         <Link className="hover:text-yellow-400" to="/">Home</Link>
         <Link className="hover:text-yellow-400" to="/products">Products</Link>
         <Link className="hover:text-yellow-400" to="/about">About</Link>
+        <Link className="hover:text-yellow-400" to="/blog">Blog</Link>
   {/* Contact as button */}
         <Link
           to="/contact"
-          className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition font-semibold"
+          className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition font-semibold hover:text-yellow-300"
         >
           Contact
         </Link>      </div>
