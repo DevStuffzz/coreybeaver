@@ -27,7 +27,7 @@ const ProductCard = ({ product }) => {
   <div className="flex justify-between mt-4 gap-2">
     {/* View Details button */}
     <Link
-      to={`/products/${product.slug.current}`}
+to={`/products/${product.slug?.current || ""}`}
       className="text-center bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer flex-1"
     >
       View Details

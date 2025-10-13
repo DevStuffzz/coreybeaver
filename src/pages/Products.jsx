@@ -7,38 +7,82 @@ const Products = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
-  const [sortOption, setSortOption] = useState("newest"); // default sort
+  const [sortOption, setSortOption] = useState("newest");
+  const [typeFilter, setTypeFilter] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 15;
+
+  // ✅ Detect dev mode
+  const isDev = typeof window !== "undefined" && window.location.hostname === "localhost";
+
+  // ✅ Generate placeholder data in dev mode
+  const generatePlaceholderProducts = (count = 50) => {
+    const placeholders = [];
+    for (let i = 1; i <= count; i++) {
+      placeholders.push({
+        _id: `placeholder-${i}`,
+        title:
+          i % 2 === 0
+            ? `Song ${i} Multitrack`
+            : `Song ${i} Chord Chart`,
+        price: (Math.random() * 40 + 5).toFixed(2),
+        _createdAt: new Date(
+          Date.now() - Math.random() * 10000000000
+        ).toISOString(),
+        image: `https://picsum.photos/seed/${i + 1}/500/500`,
+        gumroadUrl: "#",
+      });
+    }
+    return placeholders;
+  };
 
   useEffect(() => {
-    sanityClient
-      .fetch(
-        `*[_type == "product"] | order(_createdAt desc){
-          _id,
-          title,
-          slug,
-          price,
-          _createdAt,
-          "image": image.asset->url,
-          gumroadUrl
-        }`
-      )
-      .then((data) => {
-        setProducts(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        setLoading(false);
-      });
-  }, []);
+    if (isDev) {
+      // Use placeholders locally
+      setProducts(generatePlaceholderProducts());
+      setLoading(false);
+    } else {
+      // Fetch from Sanity in production
+      sanityClient
+        .fetch(
+          `*[_type == "product"] | order(_createdAt desc){
+            _id,
+            title,
+            slug,
+            price,
+            _createdAt,
+            "image": image.asset->url,
+            gumroadUrl
+          }`
+        )
+        .then((data) => {
+          setProducts(data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error(err);
+          setLoading(false);
+        });
+    }
+  }, [isDev]);
 
-  // Filter products by search term
-  const filteredProducts = products.filter((product) =>
+  // 🔍 Filter by search term
+  const filteredBySearch = products.filter((product) =>
     product.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Sort products
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
+  // 🎵 Filter by type
+  const filteredByType = filteredBySearch.filter((product) => {
+    if (typeFilter === "all") return true;
+    if (typeFilter === "multitrack")
+      return product.title.toLowerCase().includes("multitrack");
+    if (typeFilter === "chordchart" || typeFilter === "chord chart")
+      return product.title.toLowerCase().includes("chord chart");
+    return true;
+  });
+
+  // 🔢 Sort
+  const sortedProducts = [...filteredByType].sort((a, b) => {
     switch (sortOption) {
       case "name-asc":
         return a.title.localeCompare(b.title);
@@ -56,6 +100,20 @@ const Products = () => {
     }
   });
 
+  // 🧭 Pagination
+  const totalPages = Math.ceil(sortedProducts.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentProducts = sortedProducts.slice(startIndex, startIndex + itemsPerPage);
+
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, typeFilter, sortOption]);
+
   return (
     <>
       <div className="max-w-6xl mx-auto px-4 py-10">
@@ -63,16 +121,24 @@ const Products = () => {
 
         {/* Controls */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
-          {/* Search Input */}
           <input
             type="text"
             placeholder="Search products..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full md:w-1/2 p-2 border border-gray-300 rounded-lg"
+            className="w-full md:w-1/3 p-2 border border-gray-300 rounded-lg"
           />
 
-          {/* Sort Dropdown */}
+          <select
+            value={typeFilter}
+            onChange={(e) => setTypeFilter(e.target.value)}
+            className="w-full md:w-1/4 p-2 border border-gray-300 rounded-lg"
+          >
+            <option value="all">All Types</option>
+            <option value="multitrack">Multitrack</option>
+            <option value="chordchart">Chord Chart</option>
+          </select>
+
           <select
             value={sortOption}
             onChange={(e) => setSortOption(e.target.value)}
@@ -90,14 +156,49 @@ const Products = () => {
         {/* Results */}
         {loading ? (
           <p className="text-gray-500 text-xl">Loading...</p>
-        ) : sortedProducts.length === 0 ? (
+        ) : currentProducts.length === 0 ? (
           <p className="text-gray-500 text-xl">No products found.</p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {sortedProducts.map((product) => (
-              <ProductCard key={product._id} product={product} />
-            ))}
-          </div>
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {currentProducts.map((product) => (
+                <ProductCard key={product._id} product={product} />
+              ))}
+            </div>
+
+            {/* Pagination */}
+            <div className="flex justify-center items-center gap-2 mt-10">
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="px-4 py-2 border border-gray-300 rounded-lg disabled:opacity-50"
+              >
+                Prev
+              </button>
+
+              {[...Array(totalPages)].map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => handlePageChange(index + 1)}
+                  className={`px-4 py-2 border rounded-lg ${
+                    currentPage === index + 1
+                      ? "bg-indigo-600 text-white border-indigo-600"
+                      : "border-gray-300"
+                  }`}
+                >
+                  {index + 1}
+                </button>
+              ))}
+
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className="px-4 py-2 border border-gray-300 rounded-lg disabled:opacity-50"
+              >
+                Next
+              </button>
+            </div>
+          </>
         )}
       </div>
     </>

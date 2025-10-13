@@ -29,6 +29,12 @@ const Footer = () => {
           >
             Instagram
           </a>
+          <a
+            href="#/legal"
+            className="hover:text-indigo-500 transition"
+          >
+            Legal & Privacy
+          </a>
         </div>
       </div>
 

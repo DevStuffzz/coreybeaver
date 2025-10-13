@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+"deploy": "cd dist && git pull origin main --rebase && cd ../ && npm run build && cd dist && echo 'coreybeaver.com' > CNAME && git add . && git diff --cached --quiet || git commit -m 'deploy' && git push origin main --force"
   },
   "dependencies": {
     "@portabletext/react": "^4.0.3",
@@ -19,6 +20,7 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.3",
+    "react-youtube": "^10.1.0",
     "stripe": "^19.0.0"
   },
   "devDependencies": {
