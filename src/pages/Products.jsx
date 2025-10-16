@@ -78,6 +78,8 @@ const Products = () => {
       return product.title.toLowerCase().includes("multitrack");
     if (typeFilter === "chordchart" || typeFilter === "chord chart")
       return product.title.toLowerCase().includes("chord chart");
+    if (typeFilter === "sermonslides" || typeFilter === "sermon slides")
+      return product.title.toLowerCase().includes("sermon slide");
     return true;
   });
 
@@ -137,6 +139,7 @@ const Products = () => {
             <option value="all">All Types</option>
             <option value="multitrack">Multitrack</option>
             <option value="chordchart">Chord Chart</option>
+            <option value="sermonslides">Sermon Slides</option>
           </select>
 
           <select
