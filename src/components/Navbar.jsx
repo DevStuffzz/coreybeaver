@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { logo_small } from "../util/images"; // adjust path if needed
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,7 +8,10 @@ const Navbar = () => {
   return (
     <nav className="bg-gray-800 text-white px-4 md:px-6 py-4 flex items-center justify-between">
       {/* Logo */}
-      <div className="text-xl font-bold">CoreyBeaverMusic</div>
+
+      <div className="flex items-center">
+        <span className="ml-2 text-xl font-bold hidden md:inline">OliveBranch</span>
+      </div>
 
       {/* Hamburger button for mobile */}
       <button
