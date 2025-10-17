@@ -1,5 +1,6 @@
 import React from "react";
 import VerseOfTheDay from "../components/VerseOfTheDay";
+import DonateButton from "../components/DonateButton";
 
 // Service Card
 const ServiceCard = ({ title, description, requirements, pricing, link }) => (
@@ -176,13 +177,23 @@ export default function Home() {
         <p className="mb-8 max-w-3xl mx-auto text-base md:text-lg">Our mission is to inspire and equip worship leaders, musicians, and creators through professional music production, digital media services, and live worship experiences. The goal is to guide people into the salvation of <strong>Acts 2:38</strong>.</p>
       </section>
 
+      {/* Donation Section */}
+<section className="w-full py-12 md:py-16 bg-grey-100 text-center px-4 md:px-6">
+  <h3 className="text-2xl md:text-3xl font-bold mb-4">Support OliveBranch Media</h3>
+  <p className="mb-6 max-w-3xl mx-auto text-base md:text-lg">
+    Your donations help us create faith-centered music, media, and digital resources for the Oneness Pentecostal community.
+    Every gift empowers our mission to inspire and equip believers worldwide.
+  </p>
+  <DonateButton />
+</section>
+
       {/* Verse of the Day */}
-      <section className="w-full py-12 md:py-16 bg-gray-100 text-center px-4 md:px-6">
+      <section className="w-full py-12 md:py-16 bg-gray-50 text-center px-4 md:px-6">
         <VerseOfTheDay />
       </section>
 
       {/* FAQ Section */}
-      <section className="w-full py-12 md:py-16 bg-gray-50 text-center px-4 md:px-6">
+      <section className="w-full py-12 md:py-16 bg-gray-100 text-center px-4 md:px-6">
         <h3 className="text-2xl md:text-3xl font-bold mb-6">Frequently Asked Questions</h3>
         <div className="max-w-4xl mx-auto text-left">
           {faqs.map((f, i) => <FAQItem key={i} {...f} />)}

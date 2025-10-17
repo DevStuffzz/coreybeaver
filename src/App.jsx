@@ -15,6 +15,7 @@ import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import Youtube from './pages/Youtube';
 import Legal from './pages/Legal';
+import ThankYou from './pages/ThankYou';
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/videos" element={<Youtube />} />
         <Route path="/legal" element={<Legal />} />
+        <Route path="/thank-you" element={<ThankYou />} />
         <Route path="/products/:slug" element={<ProductDetail />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
